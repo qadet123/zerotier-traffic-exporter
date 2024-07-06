@@ -1,0 +1,20 @@
+[Unit]
+Description=zerotier_traffic_exporter
+After=network.target
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+LimitNOFILE=4096
+CPUQuota=100%
+MemoryMax=1G
+
+WorkingDirectory=/opt/zerotier-traffic-exporter/
+ExecStart=/opt/zerotier-traffic-exporter/zerotier-traffic-exporter --listen-address :9123 --zerotier-device ztrfyg2io2
+
+Restart=on-failure
+RestartSec=10s
+
+
+[Install]
+WantedBy=multi-user.target
